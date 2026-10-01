@@ -5,10 +5,14 @@ body{margin:0;background:var(--lav);color:var(--plum);font-family:'Sora',system-
 a{color:var(--plum)}
 .wrap{max-width:720px;margin:0 auto;padding:0 22px}
 header{padding:26px 0 0}
-.word{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;font-size:34px;color:var(--cream);text-decoration:none;position:relative;display:inline-block}
-.word:after{content:"";position:absolute;left:4%;right:4%;bottom:-6px;height:3px;border-radius:3px;background:#D4A24A;transform:rotate(-1.2deg)}
+.word{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;font-size:34px;color:var(--cream);text-decoration:none;display:inline-flex;flex-direction:column;align-items:center}
+.word-underline{width:78%;height:11px;margin-top:-2px;display:block;overflow:visible}
+.word-underline path{fill:none;stroke:#D4A24A;stroke-width:3;stroke-linecap:round}
 .hero{padding:70px 0 40px;text-align:center}
-.hero img{width:112px;height:112px;border-radius:26px;box-shadow:0 14px 34px rgba(55,42,82,.28)}
+.mark{width:112px;height:112px;margin:0 auto;filter:drop-shadow(0 14px 34px rgba(55,42,82,.28))}
+.mark svg{width:100%;height:100%;display:block}
+.mark-ring{transform-origin:190px 190px;animation:spin 14s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 h1{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(32px,7vw,48px);line-height:1.12;margin:28px 0 14px}
 .lede{font-size:17px;color:var(--muted);max-width:32em;margin:0 auto}
 .pill{display:inline-block;margin-top:26px;background:var(--plum);color:var(--cream);border-radius:999px;padding:13px 26px;font-weight:600;font-size:15px;text-decoration:none}
