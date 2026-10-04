@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get Herely</title>
+<meta name="robots" content="noindex">
+<script>
+(function(){
+  var IOS = 'https://apps.apple.com/app/id6815881023';
+  var PLAY = 'https://play.google.com/store/apps/details?id=com.beherely.app';
+  var from = (new URLSearchParams(location.search).get('from') || 'direct').replace(/[^\w-]/g, '').slice(0, 40);
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/i.test(ua);
+  var playTagged = PLAY + '&referrer=' + encodeURIComponent('utm_source=' + from + '&utm_medium=qr');
+  window.HERELY_LINKS = { ios: IOS, play: playTagged };
+  if (isIOS) location.replace(IOS);
+  else if (isAndroid) location.replace(playTagged);
+})();
+</script>
+<link rel="icon" href="../favicon.png"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Sora:wght@400;600&display=swap"><link rel="stylesheet" href="../style.css">
+<style>.stores{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}.stores .pill{margin-top:0}</style>
+</head><body>
+<div class="wrap"><header><a class="word" href="../">Herely.<svg class="word-underline" viewBox="0 0 160 20" preserveAspectRatio="none" aria-hidden="true"><path d="M6,8 Q80,20 154,6"/></svg></a></header>
+<section class="hero"><h1>Get Herely on your phone.</h1>
+<p class="lede">Meditation for the moments you're already in.</p>
+<div class="stores"><a class="pill" id="ios" href="https://apps.apple.com/app/id6815881023">App Store</a><a class="pill" id="play" href="https://play.google.com/store/apps/details?id=com.beherely.app">Google Play</a></div>
+</section></div>
+<script>document.getElementById('play').href = window.HERELY_LINKS ? window.HERELY_LINKS.play : document.getElementById('play').href;</script>
+</body></html>
