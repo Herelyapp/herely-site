@@ -3,14 +3,16 @@
 <script>
 (function(){
   var IOS = 'https://apps.apple.com/app/id6815881023';
+  var IOS_CAMPAIGN = 'https://apps.apple.com/app/apple-store/id6815881023';
   var PLAY = 'https://play.google.com/store/apps/details?id=com.beherely.app';
   var from = (new URLSearchParams(location.search).get('from') || 'direct').replace(/[^\w-]/g, '').slice(0, 40);
   var ua = navigator.userAgent || '';
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/i.test(ua);
   var playTagged = PLAY + '&referrer=' + encodeURIComponent('utm_source=' + from + '&utm_medium=qr');
-  window.HERELY_LINKS = { ios: IOS, play: playTagged };
-  if (isIOS) location.replace(IOS);
+  var iosTagged = IOS_CAMPAIGN + '?pt=129511102&mt=8&ct=' + encodeURIComponent(from);
+  window.HERELY_LINKS = { ios: iosTagged, play: playTagged };
+  if (isIOS) location.replace(iosTagged);
   else if (isAndroid) location.replace(playTagged);
 })();
 </script>
@@ -22,5 +24,5 @@
 <p class="lede">Meditation for the moments you're already in.</p>
 <div class="stores"><a class="pill" id="ios" href="https://apps.apple.com/app/id6815881023">App Store</a><a class="pill" id="play" href="https://play.google.com/store/apps/details?id=com.beherely.app">Google Play</a></div>
 </section></div>
-<script>document.getElementById('play').href = window.HERELY_LINKS ? window.HERELY_LINKS.play : document.getElementById('play').href;</script>
+<script>if (window.HERELY_LINKS) { document.getElementById('ios').href = window.HERELY_LINKS.ios; document.getElementById('play').href = window.HERELY_LINKS.play; }</script>
 </body></html>
