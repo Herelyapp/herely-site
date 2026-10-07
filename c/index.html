@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Herely</title>
+<meta name="robots" content="noindex">
+<script>
+// Numbered promo cards: QR on card 07 opens beherely.com/c/?n=07.
+// Before launch it goes to the Tally waitlist tagged ref=card-07.
+// Once Herely is live in BOTH stores, set STORES_LIVE = true and every card
+// goes to the smart link (/get/) tagged from=card-07 instead. No reprint.
+(function(){
+  var STORES_LIVE = false;
+  var n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, '').slice(0, 4);
+  var tag = n ? 'card-' + n : 'card';
+  var dest = STORES_LIVE
+    ? '../get/?from=' + encodeURIComponent(tag)
+    : 'https://tally.so/r/J9PRRR?ref=' + encodeURIComponent(tag);
+  window.HERELY_DEST = dest;
+  location.replace(dest);
+})();
+</script>
+<link rel="icon" href="../favicon.png"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Sora:wght@400;600&display=swap"><link rel="stylesheet" href="../style.css">
+</head><body>
+<div class="wrap"><header><a class="word" href="../">Herely.<svg class="word-underline" viewBox="0 0 160 20" preserveAspectRatio="none" aria-hidden="true"><path d="M6,8 Q80,20 154,6"/></svg></a></header>
+<section class="hero"><h1>One moment...</h1>
+<p class="lede">Taking you to Herely.</p>
+<a class="pill" id="go" href="https://tally.so/r/J9PRRR?ref=card">Continue</a>
+</section></div>
+<script>if (window.HERELY_DEST) document.getElementById('go').href = window.HERELY_DEST;</script>
+</body></html>
