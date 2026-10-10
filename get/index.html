@@ -11,7 +11,13 @@
   var isAndroid = /Android/i.test(ua);
   var playTagged = PLAY + '&referrer=' + encodeURIComponent('utm_source=' + from + '&utm_medium=qr');
   var iosTagged = IOS_CAMPAIGN + '?pt=129511102&mt=8&ct=' + encodeURIComponent(from);
-  window.HERELY_LINKS = { ios: iosTagged, play: playTagged };
+  // Launch switches: while a store isn't live yet, that phone goes to the early-access
+  // sign-up instead (still tagged with where they came from). Flip to true when live.
+  var IOS_LIVE = false, ANDROID_LIVE = false;
+  var waitlist = 'https://tally.so/r/J9PRRR?source=' + encodeURIComponent(from);
+  if (!IOS_LIVE) iosTagged = waitlist;
+  if (!ANDROID_LIVE) playTagged = waitlist;
+  window.HERELY_LINKS = { ios: iosTagged, play: playTagged, iosLive: IOS_LIVE, androidLive: ANDROID_LIVE };
   if (isIOS) location.replace(iosTagged);
   else if (isAndroid) location.replace(playTagged);
 })();
@@ -24,5 +30,5 @@
 <p class="lede">Meditation for the moments you're already in.</p>
 <div class="stores"><a class="pill" id="ios" href="https://apps.apple.com/app/id6815881023">App Store</a><a class="pill" id="play" href="https://play.google.com/store/apps/details?id=com.beherely.app">Google Play</a></div>
 </section></div>
-<script>if (window.HERELY_LINKS) { document.getElementById('ios').href = window.HERELY_LINKS.ios; document.getElementById('play').href = window.HERELY_LINKS.play; }</script>
+<script>if (window.HERELY_LINKS) { var L = window.HERELY_LINKS, i = document.getElementById('ios'), p = document.getElementById('play'); i.href = L.ios; p.href = L.play; if (!L.iosLive) i.textContent = 'iPhone: get notified'; if (!L.androidLive) p.textContent = 'Android: get notified'; }</script>
 </body></html>
