@@ -13,7 +13,7 @@
   var iosTagged = IOS_CAMPAIGN + '?pt=129511102&mt=8&ct=' + encodeURIComponent(from);
   // Launch switches: while a store isn't live yet, that phone goes to the early-access
   // sign-up instead (still tagged with where they came from). Flip to true when live.
-  var IOS_LIVE = true, ANDROID_LIVE = false;
+  var IOS_LIVE = true, ANDROID_LIVE = true;
   var waitlist = 'https://tally.so/r/J9PRRR?source=' + encodeURIComponent(from);
   if (!IOS_LIVE) iosTagged = waitlist;
   if (!ANDROID_LIVE) playTagged = waitlist;
