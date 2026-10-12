@@ -19,8 +19,9 @@
   if (!ANDROID_LIVE) playTagged = waitlist;
   // Free-week notice: visitors from these tags see it for a few seconds before the store.
   // It switches itself off after PROMO_END (end of Saturday Oct 17, Pacific).
-  var PROMO_FROM = ['sticker'], PROMO_END = new Date('2026-10-18T00:00:00-07:00');
-  var promo = PROMO_FROM.indexOf(from) > -1 && new Date() < PROMO_END;
+  // A tag matches itself or any tag that starts with it plus a dash (card covers card-07).
+  var PROMO_FROM = ['sticker', 'card', 'tally'], PROMO_END = new Date('2026-10-18T00:00:00-07:00');
+  var promo = new Date() < PROMO_END && PROMO_FROM.some(function(p){ return from === p || from.indexOf(p + '-') === 0; });
   window.HERELY_LINKS = { ios: iosTagged, play: playTagged, iosLive: IOS_LIVE, androidLive: ANDROID_LIVE, promo: promo, isIOS: isIOS, isAndroid: isAndroid };
   var go = isIOS ? iosTagged : isAndroid ? playTagged : null;
   if (go && promo) setTimeout(function(){ location.replace(go); }, 6000);
