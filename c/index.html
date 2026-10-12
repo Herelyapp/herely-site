@@ -6,7 +6,7 @@
 // Once Herely is live in BOTH stores, set STORES_LIVE = true and every card
 // goes to the smart link (/get/) tagged from=card-07 instead. No reprint.
 (function(){
-  var STORES_LIVE = false;
+  var STORES_LIVE = true;
   var n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, '').slice(0, 4);
   var tag = n ? 'card-' + n : 'card';
   var dest = STORES_LIVE
