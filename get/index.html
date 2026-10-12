@@ -17,9 +17,14 @@
   var waitlist = 'https://tally.so/r/J9PRRR?source=' + encodeURIComponent(from);
   if (!IOS_LIVE) iosTagged = waitlist;
   if (!ANDROID_LIVE) playTagged = waitlist;
-  window.HERELY_LINKS = { ios: iosTagged, play: playTagged, iosLive: IOS_LIVE, androidLive: ANDROID_LIVE };
-  if (isIOS) location.replace(iosTagged);
-  else if (isAndroid) location.replace(playTagged);
+  // Free-week notice: visitors from these tags see it for a few seconds before the store.
+  // It switches itself off after PROMO_END (end of Saturday Oct 17, Pacific).
+  var PROMO_FROM = ['sticker'], PROMO_END = new Date('2026-10-18T00:00:00-07:00');
+  var promo = PROMO_FROM.indexOf(from) > -1 && new Date() < PROMO_END;
+  window.HERELY_LINKS = { ios: iosTagged, play: playTagged, iosLive: IOS_LIVE, androidLive: ANDROID_LIVE, promo: promo, isIOS: isIOS, isAndroid: isAndroid };
+  var go = isIOS ? iosTagged : isAndroid ? playTagged : null;
+  if (go && promo) setTimeout(function(){ location.replace(go); }, 6000);
+  else if (go) location.replace(go);
 })();
 </script>
 <link rel="icon" href="../favicon.png"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Sora:wght@400;600&display=swap"><link rel="stylesheet" href="../style.css">
@@ -30,5 +35,13 @@
 <p class="lede">Meditation for the moments you're already in.</p>
 <div class="stores"><a class="pill" id="ios" href="https://apps.apple.com/app/id6815881023">App Store</a><a class="pill" id="play" href="https://play.google.com/store/apps/details?id=com.beherely.app">Google Play</a></div>
 </section></div>
-<script>if (window.HERELY_LINKS) { var L = window.HERELY_LINKS, i = document.getElementById('ios'), p = document.getElementById('play'); i.href = L.ios; p.href = L.play; if (!L.iosLive) i.textContent = 'iPhone: get notified'; if (!L.androidLive) p.textContent = 'Android: get notified'; }</script>
+<script>if (window.HERELY_LINKS) { var L = window.HERELY_LINKS, i = document.getElementById('ios'), p = document.getElementById('play'); i.href = L.ios; p.href = L.play; if (!L.iosLive) i.textContent = 'iPhone: get notified'; if (!L.androidLive) p.textContent = 'Android: get notified';
+  if (L.promo) {
+    document.querySelector('.hero h1').textContent = 'Surprise!';
+    document.querySelector('.hero .lede').textContent = 'Herely is free for everyone until Saturday, Oct 17. Enjoy.';
+    if (L.isIOS) p.style.display = 'none';
+    if (L.isAndroid) i.style.display = 'none';
+    if (L.isIOS || L.isAndroid) (L.isIOS ? i : p).textContent = 'Get Herely';
+  }
+}</script>
 </body></html>
