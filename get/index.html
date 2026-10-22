@@ -23,6 +23,9 @@
   var PROMO_FROM = ['sticker', 'card', 'tally'], PROMO_END = new Date('2026-10-17T00:00:00-07:00');
   var promo = new Date() < PROMO_END && PROMO_FROM.some(function(p){ return from === p || from.indexOf(p + '-') === 0; });
   window.HERELY_LINKS = { ios: iosTagged, play: playTagged, iosLive: IOS_LIVE, androidLive: ANDROID_LIVE, promo: promo, isIOS: isIOS, isAndroid: isAndroid };
+  // Tap counter (GoatCounter: no cookies, no personal data). Each visit counts as /get/<tag>.
+  try { var gc = 'https://herely.goatcounter.com/count?p=' + encodeURIComponent('/get/' + from) + '&t=' + encodeURIComponent(isIOS ? 'iPhone' : isAndroid ? 'Android' : 'Computer');
+    if (navigator.sendBeacon) navigator.sendBeacon(gc); else new Image().src = gc; } catch(e){}
   var go = isIOS ? iosTagged : isAndroid ? playTagged : null;
   if (go && promo) setTimeout(function(){ location.replace(go); }, 6000);
   else if (go) location.replace(go);
