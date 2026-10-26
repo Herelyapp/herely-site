@@ -1,0 +1,5 @@
+{
+  "android": "1.0.4",
+  "ios": "1.0.3",
+  "note": "Latest version live in each store. Herely shows an Update banner when the phone has an older one. Android reads this file; iPhone reads Apple directly. Update after each release is live."
+}
