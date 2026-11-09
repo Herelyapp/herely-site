@@ -8,7 +8,8 @@
 (function(){
   var STORES_LIVE = true;
   var n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, '').slice(0, 4);
-  var tag = n ? 'card-' + n : 'card';
+  var NAMES = { '904': 'shoppe815' };   // named cards (904 = Shoppe 815 candle card) report this name instead of card-<number>
+  var tag = n ? (NAMES[n] || 'card-' + n) : 'card';
   var dest = STORES_LIVE
     ? '../get/?from=' + encodeURIComponent(tag)
     : 'https://tally.so/r/J9PRRR?ref=' + encodeURIComponent(tag);
