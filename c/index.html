@@ -8,11 +8,24 @@
 (function(){
   var STORES_LIVE = true;
   var n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, '').slice(0, 4);
-  var NAMES = { '904': 'shoppe815' };   // named cards (904 = Shoppe 815 candle card) report this name instead of card-<number>
+  // named cards report this name instead of card-<number>
+  // 904 = Shoppe 815 candle card; 907/908/909 = HoneyBaked holiday card, standing frame, email
+  var NAMES = { '904': 'shoppe815', '907': 'honeyherely', '908': 'honeyherely', '909': 'honeyherely' };
+  // Gift-code cards: on iPhone the scan opens Apple's redeem screen with the code filled in.
+  // Android (and computers) go to the smart link as usual; Android users type the code in the app.
+  var CODES = { '907': 'HONEYHERELY', '908': 'HONEYHERELY', '909': 'HONEYHERELY' };
   var tag = n ? (NAMES[n] || 'card-' + n) : 'card';
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
   var dest = STORES_LIVE
     ? '../get/?from=' + encodeURIComponent(tag)
     : 'https://tally.so/r/J9PRRR?ref=' + encodeURIComponent(tag);
+  if (STORES_LIVE && isIOS && CODES[n]) {
+    // count the scan the same way /get/ does (GoatCounter: no cookies, no personal data)
+    try { var gc = 'https://herely.goatcounter.com/count?p=' + encodeURIComponent('/get/' + tag) + '&t=iPhone';
+      if (navigator.sendBeacon) navigator.sendBeacon(gc); else new Image().src = gc; } catch(e){}
+    dest = 'https://apps.apple.com/redeem?ctx=offercodes&id=6815881023&code=' + encodeURIComponent(CODES[n]);
+  }
   window.HERELY_DEST = dest;
   location.replace(dest);
 })();
