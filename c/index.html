@@ -10,7 +10,7 @@
   var n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, '').slice(0, 4);
   // named cards report this name instead of card-<number>
   // 904 = Shoppe 815 candle card; 907/908/909 = HoneyBaked holiday card, standing frame, email
-  var NAMES = { '904': 'shoppe815', '907': 'honeyherely', '908': 'honeyherely', '909': 'honeyherely' };
+  var NAMES = { '904': 'shoppe815', '907': 'honeyherely-card', '908': 'honeyherely-frame', '909': 'honeyherely-email' };
   // Gift-code cards: on iPhone the scan opens Apple's redeem screen with the code filled in.
   // Android (and computers) go to the smart link as usual; Android users type the code in the app.
   var CODES = { '907': 'HONEYHERELY', '908': 'HONEYHERELY', '909': 'HONEYHERELY' };
