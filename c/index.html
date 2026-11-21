@@ -14,10 +14,10 @@
   // Gift-code cards: on iPhone the scan opens Apple's redeem screen with the code filled in.
   // Android (and computers) go to the smart link as usual; Android users type the code in the app.
   var CODES = { '907': 'HONEYHERELY', '908': 'HONEYHERELY', '909': 'HONEYHERELY' };
-  // Cards that show the optional email screen first (Nov 21 2026, asked by the HoneyBaked GM).
+  // Cards that show the optional email screen first (Nov 21 2026, asked by the HoneyBaked GM; 908 = the 12x18 line signs).
   // Emails go to the Google Form "HoneyBaked card emails" (cesar@beherely.com). 909 is HBH's own
   // email blast, so those people skip it.
-  var EMAIL_STEP = { '907': 'HoneyBaked Sherman Oaks' };
+  var EMAIL_STEP = { '907': 'HoneyBaked Sherman Oaks', '908': 'HoneyBaked Sherman Oaks' };
   var tag = n ? (NAMES[n] || 'card-' + n) : 'card';
   var ua = navigator.userAgent || '';
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
